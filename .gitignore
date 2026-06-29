@@ -4,3 +4,5 @@
 # But do not ignore these
 !.gitignore
 !SpecialOne.txt
+!WanaBSpecial.txt
+!SubMaker.py

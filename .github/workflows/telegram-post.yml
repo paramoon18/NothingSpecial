@@ -2,9 +2,9 @@ name: Post WanaBSpecial to Telegram
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - 'WanaBSpecial.txt'
+      - "WanaBSpecial.txt"
   workflow_dispatch:
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Rename and send to Telegram
+      - name: Trim, rename and send to Telegram
         env:
           BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -21,7 +21,8 @@ jobs:
         run: |
           NEW_NAME="$(date +'%d%m%Y-%H%M')"
           echo "Sending as: $NEW_NAME"
-          cp WanaBSpecial.txt "/tmp/${NEW_NAME}"
+          head -n 120 WanaBSpecial.txt > "/tmp/${NEW_NAME}"
+          echo "Lines sent: $(wc -l < /tmp/${NEW_NAME})"
           curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendDocument" \
             -F chat_id="${CHAT_ID}" \
             -F document=@"/tmp/${NEW_NAME}" \

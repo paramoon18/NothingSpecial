@@ -24,7 +24,7 @@ def main():
     with open(OUTPUT_FILE, "w") as f:
         f.write(encoded_data)
 
-    print(f"Success: {INPUT_FILE} encoded and saved to {OUTPUT_FILE}")
+    print(f"Done")
     return 0
 
 if __name__ == "__main__":

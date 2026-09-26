@@ -22,8 +22,9 @@ jobs:
           NEW_NAME="$(date +'%d%m%Y-%H%M')"
           echo "Sending as: $NEW_NAME"
           head -n 120 WanaBSpecial.txt > "/tmp/${NEW_NAME}"
-          echo "Lines sent: $(wc -l < /tmp/${NEW_NAME})"
+          LINES="$(awk 'END{print NR}' /tmp/${NEW_NAME})"
+          echo "Lines sent: ${LINES}"
           curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendDocument" \
             -F chat_id="${CHAT_ID}" \
             -F document=@"/tmp/${NEW_NAME}" \
-            -F caption="Updated: ${NEW_NAME}"
+            -F caption="this file contain ${LINES} V2ray server gathered at ${NEW_NAME}"

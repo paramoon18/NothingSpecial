@@ -27,4 +27,4 @@ jobs:
           curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendDocument" \
             -F chat_id="${CHAT_ID}" \
             -F document=@"/tmp/${NEW_NAME}" \
-            -F caption="this file contain ${LINES} V2ray server gathered at ${NEW_NAME}"
+            -F caption="this file contain ${LINES} V2ray server gathered at ${NEW_NAME}MSK"
